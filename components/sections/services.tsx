@@ -1,3 +1,4 @@
+import { Element } from "react-scroll";
 import SectionContentContainer from "../section-content-container";
 import ServiceItem from "../service-item";
 
@@ -47,12 +48,14 @@ const Services = ({
   ],
 }: ServicesProp) => {
   return (
-    <SectionContentContainer header={title} paragraph={paragraph}>
-      {services &&
-        services.map(({ title, keynotes }, index) => (
-          <ServiceItem title={title} keyNotes={keynotes} key={index} />
-        ))}
-    </SectionContentContainer>
+    <Element id="our-practice" name="our-practice">
+      <SectionContentContainer header={title} paragraph={paragraph}>
+        {services &&
+          services.map(({ title, keynotes }, index) => (
+            <ServiceItem title={title} keyNotes={keynotes} key={index} />
+          ))}
+      </SectionContentContainer>
+    </Element>
   );
 };
 

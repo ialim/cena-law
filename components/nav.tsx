@@ -3,13 +3,15 @@ import { useState } from "react";
 import { SVG } from "../svg";
 import MobileMenu from "./mobile-menu";
 import Search from "./search";
+import * as Scroll from "react-scroll";
 
 export interface NavProps {
   navItems: string[];
   title: string;
 }
 
-const { search, menu, close } = SVG;
+const ScrollLink = Scroll.Link;
+const { search, menu, close, hambuger } = SVG;
 
 export const Nav = ({
   navItems = ["home", "about us", "our practice", "our team"],
@@ -27,7 +29,7 @@ export const Nav = ({
     <nav className="items-center text-white bg-brand-dark">
       <div className="flex flex-row justify-between items-center h-24 mx-11 lg:mx-48">
         <div className="justify-center">
-          <Link href="#">
+          <Link href="/">
             <a className="font-bold font-GTSuper text-2xl">{title}</a>
           </Link>
         </div>
@@ -38,27 +40,23 @@ export const Nav = ({
                 key={index}
                 className="font-BasierCircle hidden lg:block font-semibold text-sm text-center"
               >
-                <Link href="#">
-                  <a>
-                    {navItem[0].toUpperCase() + navItem.slice(1).toLowerCase()}
-                  </a>
-                </Link>
+                <ScrollLink
+                  to={navItem.replace(/ /g, "-")}
+                  spy={true}
+                  smooth={true}
+                  duration={500}
+                  className="cursor-pointer hover:text-brand-secondary"
+                  activeClass="text-brand-primary"
+                >
+                  {navItem[0].toUpperCase() + navItem.slice(1).toLowerCase()}
+                </ScrollLink>
               </div>
             ))}
           <div>
-            <button onClick={onClickSearch}>
-              {showMenu || showSearch ? "" : search}
-            </button>
+            <button onClick={onClickSearch}>{search}</button>
           </div>
           <div className="lg:hidden">
-            <button onClick={onClick}>
-              {showMenu || showSearch ? "" : menu}
-            </button>
-          </div>
-          <div>
-            <button onClick={showSearch ? onClickSearch : onClick}>
-              {showMenu || showSearch ? close : ""}
-            </button>
+            <button onClick={onClick}>{hambuger}</button>
           </div>
         </div>
       </div>

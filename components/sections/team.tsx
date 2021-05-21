@@ -1,5 +1,6 @@
 import SectionContentContainer from "../section-content-container";
 import TeamItem, { TeamItemProp } from "../team-item";
+import { Element } from "react-scroll";
 
 interface TeamProp {
   title: string;
@@ -44,18 +45,20 @@ const Team = ({
   ],
 }: TeamProp) => {
   return (
-    <SectionContentContainer header={title} paragraph={paragraph}>
-      {team &&
-        team.map(({ fullname, role, imgUrl, socials }, index) => (
-          <TeamItem
-            fullname={fullname}
-            role={role}
-            imgUrl={imgUrl}
-            socials={socials}
-            key={index}
-          />
-        ))}
-    </SectionContentContainer>
+    <Element id="our-team" name="our-team">
+      <SectionContentContainer header={title} paragraph={paragraph}>
+        {team &&
+          team.map(({ fullname, role, imgUrl, socials }, index) => (
+            <TeamItem
+              fullname={fullname}
+              role={role}
+              imgUrl={imgUrl}
+              socials={socials}
+              key={index}
+            />
+          ))}
+      </SectionContentContainer>
+    </Element>
   );
 };
 

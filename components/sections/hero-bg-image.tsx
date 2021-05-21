@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SVG } from "../../svg";
+import { Element } from "react-scroll";
 
 interface HeroImageProps {
   title: string;
@@ -15,6 +16,7 @@ export const HeroImage = ({
   ctas = ["Learn more"],
 }: HeroImageProps) => {
   return (
+    <Element id="home" name="home">
     <div
       className=" items-start relative bg-no-repeat bg-cover bg-center text-white "
       style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -108,5 +110,6 @@ export const HeroImage = ({
         </div>
       </div>
     </div>
+    </Element>
   );
 };
