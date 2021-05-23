@@ -6,12 +6,12 @@ import Search from "./search";
 import * as Scroll from "react-scroll";
 
 export interface NavProps {
-  navItems: string[];
-  title: string;
+  navItems?: string[];
+  title?: string;
 }
 
 const ScrollLink = Scroll.Link;
-const { search, menu, close, hambuger } = SVG;
+const { search, hambuger } = SVG;
 
 export const Nav = ({
   navItems = ["home", "about us", "our practice", "our team"],

@@ -2,10 +2,10 @@ import { Element } from "react-scroll";
 import SectionContentContainer from "../section-content-container";
 import ServiceItem from "../service-item";
 
-interface ServicesProp {
-  title: string;
-  paragraph: string;
-  services: {
+export interface ServicesProp {
+  title?: string;
+  paragraph?: string;
+  services?: {
     title: string;
     keynotes: string[];
   }[];

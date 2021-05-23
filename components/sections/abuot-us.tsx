@@ -2,10 +2,10 @@ import Link from "next/link";
 import { SVG } from "../../svg";
 import { Element } from "react-scroll";
 
-interface AboutUsProp {
-  title: string;
-  paragraphs: string[];
-  imgUrls: { name: string; imgUrl: string }[];
+export interface AboutUsProp {
+  title?: string;
+  paragraphs?: string[];
+  imgUrls?: { name: string; imgUrl: string }[];
 }
 
 const { forwardArrow } = SVG;

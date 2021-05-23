@@ -2,10 +2,10 @@ import SectionContentContainer from "../section-content-container";
 import TeamItem, { TeamItemProp } from "../team-item";
 import { Element } from "react-scroll";
 
-interface TeamProp {
-  title: string;
-  paragraph: string;
-  team: TeamItemProp[];
+export interface TeamProp {
+  title?: string;
+  paragraph?: string;
+  team?: TeamItemProp[];
 }
 
 const Team = ({

@@ -1,7 +1,7 @@
-interface ContactUsProps {
-  title: string;
-  backgroundImage: string;
-  ctas: string[];
+export interface ContactUsProps {
+  title?: string;
+  backgroundImage?: string;
+  ctas?: string[];
 }
 
 const ContactUs = ({

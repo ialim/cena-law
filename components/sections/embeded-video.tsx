@@ -2,8 +2,8 @@ import { SVG } from "../../svg";
 import ReactPlayer from "react-player";
 import { useState } from "react";
 
-interface EmbeddedVideoProps {
-    videoUrl: string;
+export interface EmbeddedVideoProps {
+    videoUrl?: string;
 }
 
 const { play } = SVG;

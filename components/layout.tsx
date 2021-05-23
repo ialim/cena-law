@@ -1,7 +1,7 @@
 import { Header, HeaderProps } from "./header";
 import { Footer, FooterProps } from "./footer";
 
-interface LayoutProps extends HeaderProps, FooterProps {
+export interface LayoutProps extends HeaderProps, FooterProps {
   children?: React.ReactNode;
 }
 

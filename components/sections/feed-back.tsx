@@ -1,10 +1,10 @@
 import FeedBackItem, { FeedBackItemProps } from "../feed-back-item";
 import SectionContentContainer from "../section-content-container";
 
-interface FeedBackProp {
-  title: string;
-  paragraph: string;
-  feedbacks: FeedBackItemProps[];
+export interface FeedBackProp {
+  title?: string;
+  paragraph?: string;
+  feedbacks?: FeedBackItemProps[];
 }
 
 const FeedBack = ({

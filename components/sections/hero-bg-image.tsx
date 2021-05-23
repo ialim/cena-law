@@ -2,11 +2,11 @@ import Link from "next/link";
 import { SVG } from "../../svg";
 import { Element } from "react-scroll";
 
-interface HeroImageProps {
-  title: string;
-  backgroundImage: string;
-  ctas: string[];
-  tagline: string;
+export interface HeroImageProps {
+  title?: string;
+  backgroundImage?: string;
+  ctas?: string[];
+  tagline?: string;
 }
 
 export const HeroImage = ({

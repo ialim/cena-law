@@ -4,15 +4,15 @@ import { SVG } from "../svg";
 
 export interface FooterProps {
   home?: string;
-  footerNavItems: {
+  footerNavItems?: {
     title: string;
     links: string[];
   }[];
-  socials: {
+  socials?: {
     name: string;
     link: string;
   }[];
-  blockcontent: string;
+  blockcontent?: string;
 }
 
 export const Footer = ({
