@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { SVG } from "../svg";
 
-interface FooterProps {
+export interface FooterProps {
   home?: string;
   footerNavItems: {
     title: string;

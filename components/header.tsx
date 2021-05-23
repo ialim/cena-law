@@ -1,12 +1,20 @@
 import Head from "next/head";
-import { Nav } from "./nav";
+import { Nav, NavProps } from "./nav";
 
-export const Header = (props) => {
+export interface HeaderProps extends NavProps {}
+
+export const Header = ({
+  navItems = ["home", "about us", "our practice", "our team"],
+  title = "Cena Law",
+}: HeaderProps) => {
   return (
     <div className="mx-auto sticky top-0 z-10">
       <Head>
         <title>Cena law - Your partner in immigration services</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width, viewport-fit=cover' />
+        <meta
+          name="viewport"
+          content="initial-scale=1.0, width=device-width, viewport-fit=cover"
+        />
         <link
           rel="preload"
           href="/fonts/GTSuperDisplay/GT-Super-Display-Bold.ttf"
@@ -44,7 +52,7 @@ export const Header = (props) => {
           crossOrigin=""
         />
       </Head>
-      <Nav />
+      <Nav navItems={navItems} title={title} />
     </div>
   );
 };
