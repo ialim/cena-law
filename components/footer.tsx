@@ -89,7 +89,7 @@ export const Footer = ({
                 type="email"
                 name="email"
                 placeholder="Your email"
-                className="font-normal text-sm py-4 px-1 w-4/6 lg:px-5"
+                className="font-normal text-sm py-4 px-1 w-4/6 lg:px-5 text-brand-dark"
               />
               <input
                 type="submit"

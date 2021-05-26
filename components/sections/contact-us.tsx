@@ -1,14 +1,38 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { sendEmail } from "../../utils/send-mail";
+
 export interface ContactUsProps {
   title?: string;
   backgroundImage?: string;
   ctas?: string[];
 }
 
+type ContactFormValues = {
+  fullname: string;
+  email: string;
+  available: string;
+  message: string;
+};
+
 const ContactUs = ({
   title = "Make An Appointment",
   backgroundImage = "/images/covercontact_bg.png",
   ctas = ["Book Appointment"],
 }: ContactUsProps) => {
+  const [messageStatus, setMessageStatus] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ContactFormValues>();
+  const onSubmit = handleSubmit(async (data) => {
+    const result = await sendEmail(data);
+    setMessageStatus(result.ok);
+    setTimeout(() => {
+      setMessageStatus(!result.ok);
+    }, 15000);
+  });
   return (
     <div
       className=" items-start relative bg-no-repeat bg-cover bg-center text-white "
@@ -22,44 +46,89 @@ const ContactUs = ({
           <h2 className="lg:text-center font-bold font-GTSuper text-4xl">
             {title}
           </h2>
-          <form action="" className="my-10">
+          <form action="" onSubmit={onSubmit} className="my-10">
             <div>
-              <input
-                type="text"
-                name="fullname"
-                id="fullname"
-                placeholder="Full Name"
-                className="my-2 border-brand-border border-2 bg-brand-input rounded-md py-3 pl-5 w-full lg:w-80 font-BasierCircle font-normal text-sm text-brand-secondary"
-              />
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="example@gmail.com"
-                className="my-2 lg:ml-3 border-brand-border border-2 bg-brand-input rounded-md py-3 pl-5 w-full lg:w-80 font-BasierCircle font-normal text-sm text-brand-secondary"
-              />
+              <div className="inline-flex flex-col w-full lg:w-80">
+                <input
+                  {...register("fullname", {
+                    required: "This is required",
+                    maxLength: {
+                      value: 180,
+                      message: "You exceeded the maximum length",
+                    },
+                  })}
+                  type="text"
+                  name="fullname"
+                  id="fullname"
+                  placeholder="Full Name"
+                  className="my-2 border-brand-border border-2 bg-brand-input rounded-md py-3 pl-5 font-BasierCircle font-normal text-sm text-brand-secondary"
+                />
+                {errors.fullname && (
+                  <p className="text-brand-primary text-sm font-thin font-BasierCircle">
+                    {errors.fullname.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="inline-flex flex-col w-full lg:w-80">
+                <input
+                  {...register("email", {
+                    required: "This is required",
+                    pattern: {
+                      value: /^\S+@\S+$/i,
+                      message: "Enter a valid email",
+                    },
+                  })}
+                  type="email"
+                  id="email"
+                  placeholder="example@gmail.com"
+                  className="my-2 lg:ml-3 border-brand-border border-2 bg-brand-input rounded-md py-3 pl-5 font-BasierCircle font-normal text-sm text-brand-secondary"
+                />
+                {errors.email && (
+                  <p className="lg:ml-3 text-brand-primary text-sm font-thin font-BasierCircle">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
             </div>
             <select
               placeholder="4:00 Available"
-              name="time"
-              id="available-time"
+              {...register("available", { required: "This is required" })}
+              id="available"
               onChange={() => {}}
               className="my-4 appearance-none border-brand-border border-2 bg-brand-input rounded-md py-3 pl-5 w-full font-BasierCircle font-normal text-sm text-brand-secondary"
             >
-              <option value="">4:00 Available</option>
-              <option value="dog">Dog</option>
-              <option value="cat">Cat</option>
-              <option value="hamster">Hamster</option>
-              <option value="parrot">Parrot</option>
-              <option value="spider">Spider</option>
-              <option value="goldfish">Goldfish</option>
+              <option value="13:00">13:00 Available</option>
+              <option value="14:00">14:00 Available</option>
+              <option value="15:00">15:00 Available</option>
+              <option value="16:00">16:00 Available</option>
+              <option value="17:00">17:00 Available</option>
+              <option value="18:00">18:00 Available</option>
             </select>
+            {errors.available && (
+              <p className="text-brand-primary text-sm font-thin font-BasierCircle">
+                {errors.available.message}
+              </p>
+            )}
+
             <textarea
-              name="message"
+              {...register("message", {
+                required: "This is required",
+                maxLength: {
+                  value: 400,
+                  message: "A maximum of 400 characters allowable",
+                },
+              })}
               id="message"
               placeholder="Message"
               className="my-4 border-brand-border border-2 bg-brand-input rounded-md py-3 pl-5 w-full font-BasierCircle font-normal text-sm text-brand-secondary h-36"
             />
+            {errors.message && (
+              <p className="text-brand-primary text-sm font-thin font-BasierCircle">
+                {errors.message.message}
+              </p>
+            )}
+
             <div className="flex mt-6">
               {ctas &&
                 ctas.map((cta, index) => (
@@ -74,6 +143,16 @@ const ContactUs = ({
           </form>
         </div>
       </div>
+      {messageStatus ? (
+          <div
+            className={` bg-brand-secondary font-BasierCircle text-white font-light text-sm rounded-lg p-3 my-3 mr-10 absolute top-11 animate-fadeInOut`}
+          >
+            Message successfully sent <br />
+            One of our agents will contact you shortly thanks.
+          </div>
+        ) : (
+          ""
+        )}
     </div>
   );
 };

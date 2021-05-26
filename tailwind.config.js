@@ -31,6 +31,15 @@ module.exports = {
       borderColor: {
         "brand-border": "#BDBDBD",
       },
+      keyframes: {
+        fadeInOut: {
+          "0%": { opacity: "1", right: "100px" },
+          "100%": { opacity: "0", right: "-900px"},
+        },
+      },
+      animation: {
+        fadeInOut: "fadeInOut 15s ease-in-out 1"
+      }
     },
   },
   variants: {
